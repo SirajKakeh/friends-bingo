@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Card, getCards } from "../core/api";
 import { hasGameBeenWon } from "../core/business/BingoGame";
+import { ReactComponent as ReplayLogo } from "../assets/svg/redo.svg";
 import { GameContext, GAME_ACTION } from "../core/context";
 import FreeCard from "../FreeCard/FreeCard";
 import "./Bingo.css";
@@ -32,8 +33,26 @@ export default function BingoGame() {
     }
   };
 
+  const handleResetClick = () => {
+    getCards().then((cards) => {
+      dispatch({ type: GAME_ACTION.RESET_GAME, payload: cards });
+    });
+  };
+
   return (
     <>
+      <section className="flex xl:flex-col justify-center items-center relative xl:fixed xl:left-0 xl:top-0 xl:h-screen xl:pl-4 order-last xl:order-none">
+        <FreeCard />
+        <div
+          className="flex xl:flex-col relative w-8 xl:w-16 ml-8 xl:ml-0 mt-4 xl:mt-16 text-center cursor-pointer transition duration-200 transform hover:scale-125 active:scale-100"
+          onClick={handleResetClick}
+        >
+          <ReplayLogo className="w-full min-w-full mr-2 xl:mr-0" />
+          <span className="mt-2 text-tiny xl:text-xs text-dark-blue">
+            Replay
+          </span>
+        </div>
+      </section>
       <section className="BingoGame grid place-items-center select-none cursor-pointer border-2 border-tile-red shadow-2xl">
         {cards.map((card, index) => (
           <div
@@ -52,7 +71,6 @@ export default function BingoGame() {
           </div>
         ))}
       </section>
-      <FreeCard />
     </>
   );
 }
