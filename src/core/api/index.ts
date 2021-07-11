@@ -127,7 +127,7 @@ const cards: Card[] = [
     isWon: false,
   },
   {
-    text: "They don’t know that we know they know we know",
+    text: "They don’t know that we know they know",
     isFree: false,
     isSelected: false,
     isWon: false,
