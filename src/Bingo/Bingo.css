@@ -1,0 +1,12 @@
+.BingoGame {
+  grid-template-columns: repeat(5, minmax(50px, 100px));
+  grid-auto-rows: minmax(75px, 1fr);
+  gap: 1px;
+}
+
+@screen sm {
+  .BingoGame {
+    grid-template-columns: repeat(5, minmax(100px, 200px));
+    grid-auto-rows: minmax(75px, 165px);
+  }
+}

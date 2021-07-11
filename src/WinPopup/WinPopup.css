@@ -1,0 +1,6 @@
+.WinPopup .icon-wrapper:hover {
+  transform: scale(1.2) rotate(45deg);
+}
+.WinPopup .icon-wrapper:active {
+  transform: scale(1) rotate(60deg);
+}
