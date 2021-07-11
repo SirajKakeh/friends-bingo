@@ -10,3 +10,7 @@
     grid-auto-rows: minmax(75px, 165px);
   }
 }
+
+.BingoGame .card.won {
+  animation: glow 2s linear infinite;
+}

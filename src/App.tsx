@@ -1,13 +1,26 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import {
   GameContext,
   gameReducer,
   defaultState,
+  GAME_ACTION,
 } from "./core/context/GameContext";
+import usePrevious from "./core/hooks/usePrevious";
 import Home from "./Home";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, defaultState);
+
+  const prevNumberOfWins: number = usePrevious(state.numberOfWins);
+
+  useEffect(() => {
+    if (state.numberOfWins > prevNumberOfWins) {
+      setTimeout(
+        () => dispatch({ type: GAME_ACTION.STOP_CELEBRATION, payload: null }),
+        state.celebrationTimeout
+      );
+    }
+  }, [state.numberOfWins]);
 
   return (
     <GameContext.Provider value={{ ...state, dispatch }}>

@@ -1,25 +1,51 @@
 import { Card } from "../api";
+import { NumberOfWon } from "../context";
 
-export const hasGameBeenWon = (cards: Card[]) => {
+let rowsWon: number[] = [];
+let columnsWon: number[] = [];
+let diagonalsWon: number[] = [];
+let selectedCardIndex: number;
+
+export enum CARD_SERIES_TYPE {
+  ROW,
+  COLUMN,
+  DIAGONAL,
+}
+export type hasGameBeenWonSuccessReturn = [CARD_SERIES_TYPE, number, Card[]];
+
+export type hasGameBeenWonReturnType = false | hasGameBeenWonSuccessReturn;
+
+export const hasGameBeenWon = (
+  cards: Card[],
+  numberOfWon: NumberOfWon,
+  cardIndex: number
+): hasGameBeenWonReturnType => {
+  rowsWon = numberOfWon.rows;
+  columnsWon = numberOfWon.columns;
+  diagonalsWon = numberOfWon.diagonals;
+  selectedCardIndex = cardIndex;
+
   return isAnyRowWon(cards) || isAnyColumnWon(cards) || isDiagonallyWon(cards);
 };
 
 const SIZE = 5;
 
-const isAnyRowWon = (cards: Card[]) => {
+const isAnyRowWon = (cards: Card[]): hasGameBeenWonReturnType => {
   const rows = createRows(cards, SIZE);
 
   for (let row of rows) {
-    if (isWon(row)) return row;
+    if (isWon(row))
+      return [CARD_SERIES_TYPE.ROW, getRowNumber(selectedCardIndex), row];
   }
   return false;
 };
 
-const isAnyColumnWon = (cards: Card[]) => {
+const isAnyColumnWon = (cards: Card[]): hasGameBeenWonReturnType => {
   const columns = createColumns(cards, SIZE);
 
   for (let column of columns) {
-    if (isWon(column)) return column;
+    if (isWon(column))
+      return [CARD_SERIES_TYPE.COLUMN, getColNumber(selectedCardIndex), column];
   }
   return false;
 };
@@ -28,27 +54,32 @@ const isDiagonallyWon = (cards: Card[]) => {
   return isLeftDiagonalWon(cards) || isRightDiagonalWon(cards);
 };
 
-const isLeftDiagonalWon = (cards: Card[]) => {
+const isLeftDiagonalWon = (cards: Card[]): hasGameBeenWonReturnType => {
+  if (diagonalsWon.includes(0)) return false;
+
   const diagonal = [];
 
   for (let i = 0; i < SIZE; i++) {
     diagonal.push(cards[i + i * SIZE]);
   }
 
-  return isWon(diagonal) ? diagonal : false;
+  return isWon(diagonal) ? [CARD_SERIES_TYPE.DIAGONAL, 0, diagonal] : false;
 };
 
-const isRightDiagonalWon = (cards: Card[]) => {
+const isRightDiagonalWon = (cards: Card[]): hasGameBeenWonReturnType => {
+  if (diagonalsWon.includes(1)) return false;
+
   const diagonal = [];
 
   for (let i = SIZE - 1; i >= 0; i--) {
     diagonal.push(cards[SIZE - 1 + i * (SIZE - 1)]);
   }
 
-  return isWon(diagonal) ? diagonal : false;
+  return isWon(diagonal) ? [CARD_SERIES_TYPE.DIAGONAL, 1, diagonal] : false;
 };
 
 const isWon = (cards: Card[]) =>
+  !!cards.length &&
   cards.every(({ isSelected, isFree }) => isSelected || isFree);
 
 const createRows = (
@@ -64,6 +95,8 @@ const createRows = (
 };
 
 const createRow = (array: Card[], startIndex: number) => {
+  if (rowsWon.includes(startIndex)) return [];
+
   const row = [];
 
   for (let i = 0; i < SIZE; i++) {
@@ -86,6 +119,8 @@ const createColumns = (
 };
 
 const createColumn = (array: Card[], startIndex: number) => {
+  if (columnsWon.includes(startIndex)) return [];
+
   const column = [];
 
   for (let i = 0; i < SIZE; i++) {
@@ -94,3 +129,7 @@ const createColumn = (array: Card[], startIndex: number) => {
 
   return column;
 };
+
+const getRowNumber = (cardIndex: number) => Math.floor(cardIndex / SIZE);
+
+const getColNumber = (cardIndex: number) => cardIndex % SIZE;

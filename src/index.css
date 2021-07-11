@@ -14,7 +14,9 @@
     --color-tile-red-rgb: 224, 122, 95;
     --color-dark-blue: #4c4f6b;
     --color-dark-blue-rgb: 76, 79, 107;
+    --color-light-green: #45d590;
     --color-green: #81b29a;
+    --color-dark-green: #3e6c56;
     --color-green-rgb: 129, 178, 154;
     --color-wheat-yellow: #f2cc8f;
     --color-wheat-yellow-rgb: 242, 204, 143;
@@ -31,6 +33,21 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 100%;
+  }
+
+  @keyframes glow {
+    0% {
+      background-color: var(--color-green);
+    }
+    15% {
+      background-color: var(--color-dark-green);
+    }
+    55% {
+      background-color: var(--color-light-green);
+    }
+    100% {
+      background-color: var(--color-green);
+    }
   }
 }
 
