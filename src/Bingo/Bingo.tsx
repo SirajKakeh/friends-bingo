@@ -41,7 +41,7 @@ export default function BingoGame() {
 
   return (
     <>
-      <section className="flex xl:flex-col justify-center items-center relative xl:fixed xl:left-0 xl:top-0 xl:h-screen xl:pl-4 order-last xl:order-none">
+      <section className="flex xl:flex-col justify-center items-center relative xl:fixed xl:left-0 xl:top-0 pt-8 xl:pt-0 xl:h-screen xl:pl-4 order-last xl:order-none">
         <FreeCard />
         <div
           className="flex xl:flex-col relative w-8 xl:w-16 ml-8 xl:ml-0 mt-4 xl:mt-16 text-center cursor-pointer transition duration-200 transform hover:scale-125 active:scale-100"
@@ -64,7 +64,7 @@ export default function BingoGame() {
             } ${card.isWon ? "won" : ""}`}
             onClick={() => handleCardClick(card, index)}
           >
-            <span className="font-fantasy">{card.text}</span>
+            <span className="">{card.text}</span>
             {card.isFree && (
               <span className="badge font-extrabold mt-2">FREE CARD!</span>
             )}
