@@ -49,7 +49,7 @@ export default function BingoGame() {
         >
           <ReplayLogo className="w-full min-w-full mr-2 xl:mr-0" />
           <span className="mt-2 text-tiny xl:text-xs text-dark-blue">
-            Replay
+            Reset
           </span>
         </div>
       </section>
