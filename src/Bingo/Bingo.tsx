@@ -44,10 +44,10 @@ export default function BingoGame() {
       <section className="flex xl:flex-col justify-center items-center relative xl:fixed xl:left-0 xl:top-0 pt-8 xl:pt-0 xl:h-screen xl:pl-4 order-last xl:order-none">
         <FreeCard />
         <div
-          className="flex xl:flex-col relative w-8 xl:w-16 ml-8 xl:ml-0 mt-4 xl:mt-16 text-center cursor-pointer transition duration-200 transform hover:scale-125 active:scale-100"
+          className="flex xl:flex-col relative w-8 xl:w-16 h-8 xl:h-auto ml-8 xl:ml-0 mt-4 xl:mt-16 text-center cursor-pointer transition duration-200 transform hover:scale-125 active:scale-100"
           onClick={handleResetClick}
         >
-          <ReplayLogo className="w-full min-w-full mr-2 xl:mr-0" />
+          <ReplayLogo className="redo-logo mr-2 xl:mr-0" />
           <span className="mt-2 text-tiny xl:text-xs text-dark-blue">
             Reset
           </span>

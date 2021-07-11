@@ -2,6 +2,7 @@
   grid-template-columns: repeat(5, minmax(50px, 100px));
   grid-auto-rows: minmax(75px, 1fr);
   gap: 1px;
+  min-height: 45rem;
 }
 
 @screen sm {
@@ -13,4 +14,8 @@
 
 .BingoGame .card.won {
   animation: glow 2s linear infinite;
+}
+
+.redo-logo {
+  min-width: 2rem;
 }
