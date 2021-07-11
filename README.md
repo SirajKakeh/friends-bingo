@@ -14,7 +14,7 @@ A free card is a card that can be part of any row, column or diagonal stack for 
 - Custom Tailwind config and utilities
 - No usage of 3rd party libraries with the exception to React and Tailwind
 - Interactivity with CSS transitions only
-
+- Custom hooks
 
 ## Possible Enhancements
 - Use SVGs instead of GIFs
